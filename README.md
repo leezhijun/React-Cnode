@@ -25,4 +25,14 @@
   },
 ```
 
-#### 4.
+#### 4.安装redux,react-redux,redux-devtools-extension,redux-saga
+
+执行 `npm install redux react-redux redux-devtools-extension redux-saga --save-dev`配置store
+
+#### 5.安装路由react-router-dom
+
+执行 `npm install react-router-dom --save-dev` 根目录新建routeConfig.jsx作为路由
+
+#### 6.安装node-sass
+
+执行`npm install node-sass --save-dev` 
