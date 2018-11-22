@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 /* eslint no-dupe-keys: 0, no-mixed-operators: 0 */
 import { ListView } from 'antd-mobile';
-
+import { connect } from 'react-redux'
+import { fechTopics } from '../../actions/list'
 const data = [
   {
     img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
@@ -32,7 +32,7 @@ function genData(pIndex = 0) {
   return dataBlob;
 }
 
-class List extends React.Component {
+class List extends Component {
   constructor(props) {
     super(props);
     const dataSource = new ListView.DataSource({
@@ -46,6 +46,14 @@ class List extends React.Component {
   }
 
   componentDidMount() {
+    const { tab, fechTopics } = this.props
+    const params ={
+      tab,
+      limit:NUM_ROWS,
+      page:pageIndex,
+      mdrender: 'false'
+    }
+    fechTopics(params)
     // you can scroll to the specified position
     // setTimeout(() => this.lv.scrollTo(0, 120), 800);
 
@@ -127,7 +135,6 @@ class List extends React.Component {
       <ListView
         ref={el => this.lv = el}
         dataSource={this.state.dataSource}
-        renderHeader={() => <span>header</span>}
         renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
           {this.state.isLoading ? 'Loading...' : 'Loaded'}
         </div>)}
@@ -147,4 +154,4 @@ class List extends React.Component {
 
 
 
-export default List
+export default connect(null,{ fechTopics })(List)

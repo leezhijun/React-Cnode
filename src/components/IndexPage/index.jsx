@@ -3,7 +3,7 @@ import { Tabs, WhiteSpace } from 'antd-mobile';
 import List from '../List'
 class IndexPage extends Component {
   renderContent = tab =>
-    (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+    (<div style={{ backgroundColor: '#fff' }}>
       <List tab={tab.key} />
     </div>);
 
