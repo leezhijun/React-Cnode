@@ -1,0 +1,25 @@
+:local {
+  .topic-item {
+    padding: 15px 0;
+    .item-titile {
+      line-height: 1.5;
+      color: #666;
+      font-size: 16px;
+      padding-left: 2px;
+      border-bottom: "1px solid #F6F6F6";
+      span{
+        display: inline-block;
+        padding: 2px 4px;
+        font-size: 12px;
+        margin-right: 4px;
+        color: #666;
+        background-color:#dedede;
+        border-radius: 2px;
+      }
+      .top{
+        color: #ffffff;
+        background-color: #299aeb;
+      }
+    }
+  }
+}
