@@ -1,3 +1,30 @@
-.topic{
-  background-color: #fefefe;
+:local{
+  .topic{
+    background-color: #fefefe;
+    h1{
+      font-size: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #efefef;
+    }
+    .topic-head{
+      display: flex;
+      justify-content: space-between;
+      .topic-head-img{
+        img{
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .topic-head-left{
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+      }
+      .topic-head-info{
+        color: #666;
+        margin-top: 2px;
+      }
+    }
+  }
 }
+
