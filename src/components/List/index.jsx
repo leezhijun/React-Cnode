@@ -22,17 +22,17 @@ import { fechTopics } from '../../actions/list'
 //     des: '不是所有的兼职汪都需要风吹日晒',
 //   },
 // ];
-const NUM_ROWS = 20;
-let pageIndex = 0;
+// const NUM_ROWS = 20;
+// let pageIndex = 0;
 
-function genData(pIndex = 0,NUM_ROWS) {
-  const dataBlob = {};
-  for (let i = 0; i < NUM_ROWS; i++) {
-    const ii = (pIndex * NUM_ROWS) + i;
-    dataBlob[`${ii}`] = `row - ${ii}`;
-  }
-  return dataBlob;
-}
+// function genData(pIndex = 0) {
+//   const dataBlob = {};
+//   for (let i = 0; i < NUM_ROWS; i++) {
+//     const ii = (pIndex * NUM_ROWS) + i;
+//     dataBlob[`${ii}`] = `row - ${ii}`;
+//   }
+//   return dataBlob;
+// }
 
 class List extends Component {
   constructor(props) {
@@ -40,58 +40,48 @@ class List extends Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
-    const {tab,topics} = props
-    this.initData = topics[tab]['data']
+
     this.state = {
-      dataSource:dataSource.cloneWithRows(this.initData),
+      dataSource,
       isLoading: true,
     };
   }
 
   componentDidMount() {
-    const { fechTopics, tab, topics } = this.props
-    const { page , limit } = topics[tab]
-    const payload = { tab, page , limit }
-    fechTopics(payload)
+    const {tab,fechTopics,topics} = this.props
+    const page = topics[tab]['page'] // 当前页码
+    const limit = topics[tab]['limit'] // 调用条数
+    fechTopics({tab,page,limit})
   }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
-    const {tab, topics} = nextProps
-    // console.log(topics[tab]['data'])
-    this.initData = topics[tab]['data'];
+    const {tab,topics} = nextProps
+    const data = topics[tab]['data']
+    if (data !== this.props.dataSource) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.initData),
+        dataSource: this.state.dataSource.cloneWithRows(data),
         isLoading: false,
-    });
-    // if (topics[tab]['data'] !== this.state.dataSource) {
-    //   this.setState({
-    //     dataSource: this.state.dataSource.cloneWithRows(topics[tab]['data']),
-    //     isLoading: false
-    //   });
-    // }
+      });
+    }
   }
 
   onEndReached = (event) => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    // if (this.state.isLoading && !this.state.hasMore) {
-    //   return;
-    // }
-    // console.log('reach end', event);
-    // this.setState({ isLoading: true });
-    // setTimeout(() => {
-    //   // this.rData = { ...this.rData, ...genData(++pageIndex) };
-    //   this.setState({
-    //     dataSource: this.state.dataSource.cloneWithRows(this.rData),
-    //     isLoading: false,
-    //   });
-    // }, 1000);
+    console.log(123)
+    if (this.state.isLoading && !this.state.hasMore) {
+      return;
+    }
+    console.log('reach end', event);
+    this.setState({ isLoading: true });
+    const {tab,fechTopics,topics} = this.props
+    const page = topics[tab]['page'] // 当前页码
+    const limit = topics[tab]['limit'] // 调用条数
+    fechTopics({tab,page,limit})
   }
 
   render() {
-    const { tab, topics } = this.props
-    const data = topics[tab]['data']
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
@@ -103,14 +93,9 @@ class List extends Component {
         }}
       />
     );
-    let index = data.length ;
-    const row = () => {
-      if (index < 0) {
-        index = data.length - 1;
-      }
-      const obj = data[data.length - index--];
+    const row = (rowData) => {
       return (
-        <ListItem obj={obj} />
+        <ListItem obj={rowData} />
       );
     };
     return (
@@ -127,7 +112,7 @@ class List extends Component {
         initialListSize={10}
         pageSize={20}
         useBodyScroll
-        // onScroll={() => { console.log('scroll'); }}
+        onScroll={() => { console.log('scroll'); }}
         scrollRenderAheadDistance={500}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={10}
@@ -135,7 +120,6 @@ class List extends Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) =>{
   return {
