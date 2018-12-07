@@ -5,7 +5,7 @@ function* fetchTopic(action) {
   // console.log(action)
   try {
     const res = yield call(axios.get, `https://cnodejs.org/api/v1/topic/${action.payload.id}`);
-    console.log(res)
+    // console.log(res)
     yield put({type: "FETCH_TOPIC_SUCCEEDED", payload:{
       data:res.data.data
     }});

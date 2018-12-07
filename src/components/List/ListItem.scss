@@ -2,6 +2,7 @@
   .topic-item {
     padding: 15px 0;
     .item-titile {
+      padding-bottom: 10px;
       line-height: 1.5;
       color: #363636;
       width: 100%;
@@ -9,8 +10,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      padding-left: 2px;
-      border-bottom: "1px solid #F6F6F6";
+      border-bottom: 1px solid #F6F6F6;
       span{
         display: inline-block;
         padding: 2px 4px;
@@ -27,17 +27,16 @@
     }
     .item-content{
       padding: 10px 0;
-    }
-    .item-des{
-      font-size: 14px;
-      line-height: 1.5;
-      text-indent: 2em;
-      color: #666;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed #efefef;
+      color:#999;
+      font-size:13px;
+      line-height:1.2;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2;
     }
     .item-footer{
       display: flex;

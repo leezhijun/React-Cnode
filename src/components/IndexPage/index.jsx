@@ -14,15 +14,17 @@ class IndexPage extends Component {
       { title: '分享', key:'share' },
       { title: '问答', key:'ask' },
       { title: '招聘', key:'job' },
-      { title: '客户端测试', key:'dev' },
+      // { title: '客户端测试', key:'dev' },
     ];
 
     return (
       <Fragment>
         <WhiteSpace />
-        <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
-          {this.renderContent}
-        </Tabs>
+        <div className='main'>
+          <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
+            {this.renderContent}
+          </Tabs>
+        </div>
         <WhiteSpace />
       </Fragment>
     );
