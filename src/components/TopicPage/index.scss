@@ -13,6 +13,7 @@
       display: flex;
       justify-content: space-between;
       padding-bottom: 10px;
+      color: #666;
       border-bottom: 1px solid #efefef;
       .topic-head-img{
         margin-right: 6px;
@@ -25,16 +26,15 @@
       .topic-head-left{
         display: flex;
         align-items: center;
-
       }
       .topic-head-info{
-        color: #666;
+
         margin-top: 6px;
         font-size: 13px;
       }
       .topic-head-user{
         a{
-          color: #5fafe8;
+          color: #3794d8;
           font-size: 16px;
         }
       }
@@ -50,5 +50,36 @@
       }
     }
   }
+  .comment-head{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #efefef;
+  }
+  .comment-head-left{
+    a{
+      color: #3794d8;
+    }
+    img{
+      margin-right: 6px;
+    }
+  }
+  .comment-head-right{
+    color: #666;
+    i{
+      padding-left: 10px;
+      font-size: 16px;
+    }
+  }
+  .comment-add{
+    margin: 15px 0;
+    font-size: 16px;
+    padding-left: 4px;
+    border-left: #3794d8 solid 2px;
+  }
 }
 
+.am-list-header,.am-list-item{
+  padding-left: 0;
+}

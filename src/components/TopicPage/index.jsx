@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import { fechTopic } from "../../actions/topic.js";
 import { withRouter, Link } from "react-router-dom";
 import { WhiteSpace, WingBlank, Icon } from "antd-mobile";
+import {Helmet} from "react-helmet";
 import Comment from './Comment'
 import timeago from "timeago.js";
 import style from "./index.scss";
 import "github-markdown-css";
+
+const timeagoInstance = timeago();
 
 class Topic extends Component {
 
@@ -19,39 +22,44 @@ class Topic extends Component {
 
   renderContent = topic => {
     return (
-      <article className={style.topic}>
-        <WingBlank>
-          <div className={style["topic-head"]}>
-            <div className={style["topic-head-left"]}>
-              <div className={style["topic-head-img"]}>
-                <img src={topic.author.avatar_url} alt={topic.author.loginname} />
+      <Fragment>
+        <Helmet>
+          <title>{topic.title}</title>
+        </Helmet>
+        <article className={style.topic}>
+          <WingBlank>
+            <div className={style["topic-head"]}>
+              <div className={style["topic-head-left"]}>
+                <div className={style["topic-head-img"]}>
+                  <img src={topic.author.avatar_url} alt={topic.author.loginname} />
+                </div>
+                <div>
+                  <div className={style["topic-head-user"]}>
+                    <Link to={`/user/${topic.author.loginname}`}>
+                      {topic.author.loginname}
+                    </Link>
+                    &nbsp;&nbsp;{timeagoInstance.format(topic.last_reply_at, "zh_CN")}
+                  </div>
+                  <div className={style["topic-head-info"]}>
+                    阅读&nbsp;&nbsp;{topic.visit_count}
+                    &nbsp;&nbsp;回复&nbsp;&nbsp;{topic.reply_count}
+                  </div>
+                </div>
               </div>
-              <div>
-                <div className={style["topic-head-user"]}>
-                  <Link to={`/user/${topic.author.loginname}`}>
-                    {topic.author.loginname}
-                  </Link>
-                  &nbsp;&nbsp;{timeago().format(topic.last_reply_at, "zh_CN")}
-                </div>
-                <div className={style["topic-head-info"]}>
-                  阅读&nbsp;&nbsp;{topic.visit_count}
-                  &nbsp;&nbsp;回复&nbsp;&nbsp;{topic.reply_count}
-                </div>
+              <div className={style["topic-head-collect"]}>
+                <div>收藏</div>
+                <i className="icon iconfont">&#xe7df;</i>
               </div>
             </div>
-            <div className={style["topic-head-collect"]}>
-              <div>收藏</div>
-              <i className="icon iconfont">&#xe7df;</i>
-            </div>
-          </div>
-          <h1>{topic.title}</h1>
-          <article
-            className="markdown-body"
-            dangerouslySetInnerHTML={{ __html: topic.content }}
-          />
-          <Comment />
-        </WingBlank>
-      </article>
+            <h1>{topic.title}</h1>
+            <article
+              className="markdown-body"
+              dangerouslySetInnerHTML={{ __html: topic.content }}
+            />
+            <Comment replies={topic.replies} timeagoInstance={timeagoInstance} />
+          </WingBlank>
+        </article>
+      </Fragment>
     );
   };
 

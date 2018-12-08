@@ -1,0 +1,27 @@
+:local{
+  .login{
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width:300px;
+    height:100px;
+    margin-left:-150px;
+    margin-top:-50px;
+    input{
+      background:none;
+      outline:none;
+      width: 100%;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      padding-left: 6px;
+      font-size: 16px;
+      line-height: 1.4;
+      border: 1px solid #999 ;
+      border-radius: 4px;
+      &::placeholder{
+        color: #666;
+      }
+    }
+  }
+}

@@ -1,10 +1,14 @@
 body{
   font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 }
+
 .am-tab-bar-bar .am-tab-bar-tab-title{
   font-size: 15px;
 }
 a{color:#363636}
 .main{
   margin-bottom: 50px;
+}
+.CodeMirror, .CodeMirror-scroll {
+  min-height: 100px;
 }
