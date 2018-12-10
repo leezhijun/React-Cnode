@@ -1,0 +1,25 @@
+:local{
+  .userinfo{
+    padding: 20px 0;
+    margin: 0 auto;
+    background-color: #fefefe;
+  }
+  .user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.6;
+    .loginname{
+      font-size: 20px;
+      padding: 10px 0;
+    }
+    img{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .user-message{
+      color: #666;
+    }
+  }
+}

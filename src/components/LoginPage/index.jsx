@@ -22,7 +22,6 @@ class LoginPage extends PureComponent {
               onChange={this.changeHandle}
               value={this.state.accesstoken}
             />
-            <WhiteSpace />
             <Button type="primary" >登录</Button>
           </div>
         </div>

@@ -1,6 +1,5 @@
 :local{
   .login{
-
     position: absolute;
     left: 50%;
     top: 50%;
@@ -15,12 +14,13 @@
       padding-top: 6px;
       padding-bottom: 6px;
       padding-left: 6px;
+      margin-bottom: 15px;
       font-size: 16px;
       line-height: 1.4;
-      border: 1px solid #999 ;
+      border: 1px solid #cecece ;
       border-radius: 4px;
       &::placeholder{
-        color: #666;
+        color: #999;
       }
     }
   }

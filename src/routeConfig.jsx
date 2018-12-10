@@ -5,6 +5,7 @@ import Footer from './components/public/Footer'
 import IndexPage from './components/IndexPage'
 import TopicPage from './components/TopicPage'
 import LoginPage from './components/LoginPage'
+import UserPage from './components/UserPage'
 const Routes = () => {
   return (
     <Router>
@@ -13,6 +14,7 @@ const Routes = () => {
         <Route exact path='/' component={IndexPage} />
         <Route exact path='/topic/:id' component={TopicPage} />
         <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/user/:loginname' component={UserPage} />
         <Footer />
       </Fragment>
     </Router>
