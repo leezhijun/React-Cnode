@@ -17,7 +17,6 @@ class UserPage extends PureComponent {
   componentDidMount() {
     const { match, fechUser } = this.props;
     let loginname = match.params.loginname;
-    console.log(loginname);
     fechUser({ loginname });
   }
 
@@ -47,14 +46,14 @@ class UserPage extends PureComponent {
                   backgroundColor: "#fff"
                 }}
               >
-                {user.recent_topics.map(item => <Link to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
+                {user.recent_topics.map(item => <Link key={item.id} to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
               </div>
               <div
                 style={{
                   backgroundColor: "#fff"
                 }}
               >
-                {user.recent_replies.map(item => <Link to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
+                {user.recent_replies.map(item => <Link key={item.id} to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
               </div>
             </Tabs>
           </div>

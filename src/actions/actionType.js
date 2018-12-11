@@ -1,3 +1,4 @@
 export const FETCH_TOPICS_REQUEST = 'FETCH_TOPICS_REQUEST' // 请求话题列表
 export const FETCH_TOPIC_REQUEST = 'FETCH_TOPIC_REQUEST' // 请求话题文章
 export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST' // 请求用户
+export const FETCH_LOGIN_REQUEST = 'FETCH_LOGIN_REQUEST' // 请求登录

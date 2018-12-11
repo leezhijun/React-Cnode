@@ -6,6 +6,9 @@ import IndexPage from './components/IndexPage'
 import TopicPage from './components/TopicPage'
 import LoginPage from './components/LoginPage'
 import UserPage from './components/UserPage'
+import PublishPage from './components/PublishPage'
+import MsgPage from './components/MsgPage'
+
 const Routes = () => {
   return (
     <Router>
@@ -15,6 +18,8 @@ const Routes = () => {
         <Route exact path='/topic/:id' component={TopicPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/user/:loginname' component={UserPage} />
+        <Route exact path='/publish' component={PublishPage} />
+        <Route exact path='/message' component={MsgPage} />
         <Footer />
       </Fragment>
     </Router>

@@ -26,7 +26,7 @@ class ListItem extends PureComponent {
       <div key={obj.id} className={style['topic-item']}>
         <WingBlank>
         <div className={style['item-titile']}>
-          <span className={(obj.top||obj.good)&&style['top']}>{ obj.top ? '置顶': (obj.good? '精华': this.getTab(obj.tab))}</span>
+          <span className={(obj.top||obj.good) ? style['top'] : ''}>{ obj.top ? '置顶': (obj.good? '精华': this.getTab(obj.tab))}</span>
           <Link to={`/topic/${obj.id}`}>{obj.title}</Link>
         </div>
         <div className={style['item-content']}>

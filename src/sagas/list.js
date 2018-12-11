@@ -2,7 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchList(action) {
-  console.log(action)
+  // console.log(action)
   try {
     const res = yield call(axios.get, "https://cnodejs.org/api/v1/topics",{params:action.payload});
     yield put({type: "FETCH_LIST_SUCCEEDED", payload:{

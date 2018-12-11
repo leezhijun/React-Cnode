@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { TabBar } from 'antd-mobile';
-
+import { withRouter } from "react-router";
 class Footer extends PureComponent {
   constructor(props) {
     super(props);
@@ -12,6 +12,7 @@ class Footer extends PureComponent {
   }
 
   render() {
+    const {history} = this.props
     return (
       <div style={this.state.fullScreen ? { position: 'fixed', width: '100%', bottom: 0 } : { height: 400 }}>
         <TabBar
@@ -32,6 +33,7 @@ class Footer extends PureComponent {
               this.setState({
                 selectedTab: 'indexTab',
               });
+              history.push('/')
             }}
             data-seed="logId"
           >
@@ -46,6 +48,7 @@ class Footer extends PureComponent {
               this.setState({
                 selectedTab: 'publishTab',
               });
+              history.push('/publish')
             }}
             data-seed="logId1"
           >
@@ -61,6 +64,7 @@ class Footer extends PureComponent {
               this.setState({
                 selectedTab: 'messageTab',
               });
+              history.push('/message')
             }}
           >
           </TabBar.Item>
@@ -74,6 +78,7 @@ class Footer extends PureComponent {
               this.setState({
                 selectedTab: 'myTab',
               });
+              history.push('/user/leezhijun')
             }}
           >
           </TabBar.Item>
@@ -83,4 +88,4 @@ class Footer extends PureComponent {
   }
 }
 
-export default Footer
+export default withRouter(Footer)
