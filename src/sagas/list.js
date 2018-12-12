@@ -10,7 +10,10 @@ function* fetchList(action) {
       data:res.data.data
     }});
   } catch(e) {
-    yield put({type: "FETCH_LIST_FAILURE", error: e.message});
+    yield put({type: "FETCH_LIST_FAILURE", payload:{
+      tab:action.payload.tab,
+      error: e.message
+    }});
   }
 }
 

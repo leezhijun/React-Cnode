@@ -24,6 +24,12 @@ export const login = (state = defaultState, action) => {
       loading:false,
       error: action.error
     }
+    case "LOGIN_OUT" :
+    return {
+      data:{},
+      loading:false,
+      error: false
+    }
     default:
       return state
   }

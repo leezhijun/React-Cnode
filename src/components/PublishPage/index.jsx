@@ -1,5 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import { Picker, List, WhiteSpace, InputItem, WingBlank, Toast } from "antd-mobile";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Editor from "../public/Editor";
 import style from "./index.scss";
 const district = [
@@ -27,6 +29,13 @@ class PublishPage extends PureComponent {
     title: null,
     content: null
   };
+
+  componentDidMount() {
+    const { login, history } = this.props;
+    if(!login.data.accesstoken) {
+      history.push('/login')
+    }
+  }
 
   setContent = content => {
     this.setState((state, props) => ({
@@ -84,4 +93,15 @@ class PublishPage extends PureComponent {
   }
 }
 
-export default PublishPage;
+const mapStateToProps = state => {
+  return {
+    login: state.login
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {}
+  )(PublishPage)
+);

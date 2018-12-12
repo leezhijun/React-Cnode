@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from "react";
 /* eslint no-dupe-keys: 0, no-mixed-operators: 0 */
-import { ListView } from 'antd-mobile';
-import ListItem from './ListItem'
-import { connect } from 'react-redux'
-import { fechTopics } from '../../actions/list'
+import { ListView, WhiteSpace, WingBlank } from "antd-mobile";
+import ListItem from "./ListItem";
+import { connect } from "react-redux";
+import { fechTopics } from "../../actions/list";
 
 // const data = [
 //   {
@@ -38,93 +38,108 @@ class List extends Component {
   constructor(props) {
     super(props);
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
+      rowHasChanged: (row1, row2) => row1 !== row2
     });
 
     this.state = {
       dataSource,
-      isLoading: true,
+      isLoading: true
     };
   }
 
   componentDidMount() {
-    const {tab,fechTopics,topics} = this.props
-    const page = topics[tab]['page'] // 当前页码
-    const limit = topics[tab]['limit'] // 调用条数
-    fechTopics({tab,page,limit})
+    const { tab, fechTopics, topics } = this.props;
+    const page = topics[tab]["page"]; // 当前页码
+    const limit = topics[tab]["limit"]; // 调用条数
+    fechTopics({ tab, page, limit });
   }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
   componentWillReceiveProps(nextProps) {
-    const {tab,topics} = nextProps
-    const data = topics[tab]['data']
+    const { tab, topics } = nextProps;
+    const data = topics[tab]["data"];
     if (data !== this.props.dataSource) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(data),
-        isLoading: false,
+        isLoading: false
       });
     }
   }
 
-  onEndReached = (event) => {
+  onEndReached = event => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
     if (this.state.isLoading && !this.state.hasMore) {
       return;
     }
-    console.log('reach end', event);
+    // console.log('reach end', event);
     this.setState({ isLoading: true });
-    const {tab,fechTopics,topics} = this.props
-    const page = topics[tab]['page'] // 当前页码
-    const limit = topics[tab]['limit'] // 调用条数
-    fechTopics({tab,page,limit})
-  }
+    const { tab, fechTopics, topics } = this.props;
+    const page = topics[tab]["page"]; // 当前页码
+    const limit = topics[tab]["limit"]; // 调用条数
+    fechTopics({ tab, page, limit });
+  };
 
   render() {
+    const { tab, topics } = this.props;
     const separator = (sectionID, rowID) => (
       <div
         key={`${sectionID}-${rowID}`}
         style={{
-          backgroundColor: '#F5F5F9',
+          backgroundColor: "#F5F5F9",
           height: 8,
-          borderTop: '1px solid #ECECED',
-          borderBottom: '1px solid #ECECED',
+          borderTop: "1px solid #ECECED",
+          borderBottom: "1px solid #ECECED"
         }}
       />
     );
-    const row = (rowData) => {
-      return (
-        <ListItem obj={rowData} />
-      );
+    const row = rowData => {
+      return <ListItem obj={rowData} />;
     };
     return (
-      <ListView
-        ref={el => this.lv = el}
-        dataSource={this.state.dataSource}
-        // renderHeader={() => <span>header</span>}
-        renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-          {this.state.isLoading ? 'Loading...' : 'Loaded'}
-        </div>)}
-        renderRow={row}
-        renderSeparator={separator}
-        className="am-list"
-        initialListSize={10}
-        pageSize={20}
-        useBodyScroll
-        onScroll={() => { console.log('scroll'); }}
-        scrollRenderAheadDistance={500}
-        onEndReached={this.onEndReached}
-        onEndReachedThreshold={10}
-      />
+      <Fragment>
+        {topics[tab]["error"] ? (
+          <div>
+            <WhiteSpace />
+            <WingBlank>{topics[tab]["error"]}</WingBlank>
+            <WhiteSpace />
+          </div>
+        ) : (
+          <ListView
+            ref={el => (this.lv = el)}
+            dataSource={this.state.dataSource}
+            // renderHeader={() => <span>header</span>}
+            renderFooter={() => (
+              <div style={{ padding: 30, textAlign: "center" }}>
+                {this.state.isLoading ? "Loading..." : "Loaded"}
+              </div>
+            )}
+            renderRow={row}
+            renderSeparator={separator}
+            className="am-list"
+            initialListSize={10}
+            pageSize={20}
+            useBodyScroll
+            onScroll={() => {
+              console.log("scroll");
+            }}
+            scrollRenderAheadDistance={500}
+            onEndReached={this.onEndReached}
+            onEndReachedThreshold={10}
+          />
+        )}
+      </Fragment>
     );
   }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = state => {
   return {
-    topics:state.topics
-  }
-}
+    topics: state.topics
+  };
+};
 
-
-export default connect(mapStateToProps,{ fechTopics })(List)
+export default connect(
+  mapStateToProps,
+  { fechTopics }
+)(List);

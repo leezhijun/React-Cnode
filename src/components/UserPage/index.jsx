@@ -14,6 +14,7 @@ const tabs = [
 const Item = List.Item;
 
 class UserPage extends PureComponent {
+
   componentDidMount() {
     const { match, fechUser } = this.props;
     let loginname = match.params.loginname;
