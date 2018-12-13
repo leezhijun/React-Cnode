@@ -1,58 +1,77 @@
 import React, { PureComponent, Fragment } from "react";
-import { List, WhiteSpace } from "antd-mobile";
-import { Link } from "react-router-dom";
+import { List, WhiteSpace, Flex, Button, Toast } from "antd-mobile";
+import { connect } from "react-redux";
+import { fechReplies } from '../../actions/topic'
+import CommentItem from './CommentItem'
 import Editor from "../public/Editor";
 import style from "./index.scss";
-const Item = List.Item;
 
 class Comment extends PureComponent {
+
+  state = {
+    content: null
+  };
+
+  setContent = content => {
+    this.setState({ content });
+  };
+
+  handleClick = () => {
+    const { id, fechReplies } = this.props;
+    const content = this.state.content
+    if (!content) {
+      Toast.info("内容不能为空", 1);
+      return false;
+    }
+    // console.log({content,id})
+    fechReplies({content,id})
+  };
+
+  renderEidtor = () => {
+    return <Fragment>
+      <Editor getContent={this.setContent} />
+        <Flex justify="end">
+          <Button
+            style={{ marginRight: "10px" }}
+            type="ghost"
+            inline
+            size="small"
+            onClick={this.handleClick}
+          >
+            发布
+          </Button>
+        </Flex>
+    </Fragment>;
+  };
+
   render() {
-    const { replies, timeagoInstance } = this.props;
+    const { replies, timeagoInstance, login, id } = this.props;
     return (
       <Fragment>
         <List
           renderHeader={() => `${replies.length} 条回复`}
           className="my-list"
         >
-          {replies.map(item => {
-            return (
-              <Item key={item.id} wrap>
-                <div className={style["comment-head"]}>
-                  <div className={style["comment-head-left"]}>
-                    <img
-                      src={item.author.avatar_url}
-                      alt={item.author.loginname}
-                    />
-                    <Link to={`/user/${item.author.loginname}`}>
-                      {item.author.loginname}
-                    </Link>
-                    <span style={{ fontSize: "13px", color: "#666" }}>
-                      &nbsp;&nbsp;
-                      {timeagoInstance.format(item.create_at, "zh_CN")}
-                    </span>
-                  </div>
-                  <div className={style["comment-head-right"]}>
-                    <i className="icon iconfont">&#xe7c8;</i>&nbsp;
-                    {item.ups.length && item.ups.length}
-                    <i className="icon iconfont">&#xec45;</i>
-                  </div>
-                </div>
-                <article
-                  className="markdown-body"
-                  dangerouslySetInnerHTML={{ __html: item.content }}
-                />
-              </Item>
-            );
-          })}
+        <WhiteSpace />
+          {replies.map(item => <CommentItem key={item.id} item={item} timeagoInstance={timeagoInstance} topic_id={id} />)}
         </List>
         <WhiteSpace />
         <h4 className={style["comment-add"]}>添加回复</h4>
         <WhiteSpace />
-        <Editor />
+          { login.data.accesstoken ? this.renderEidtor() : <div style={{textAlign:'center'}}>您尚未登录,请登录后操作!</div> }
         <WhiteSpace />
       </Fragment>
     );
   }
 }
 
-export default Comment;
+const mapStateToProps = state => {
+  return {
+    login: state.login
+  };
+};
+
+export default connect(
+    mapStateToProps,
+    { fechReplies }
+  )(Comment)

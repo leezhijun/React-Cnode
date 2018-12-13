@@ -12,9 +12,15 @@ import "github-markdown-css";
 const timeagoInstance = timeago();
 
 class Topic extends Component {
+  state ={
+    id:null
+  }
   componentDidMount() {
     const { match, fechTopic } = this.props;
     const id = match.params.id;
+    this.setState({
+      id
+    })
     // console.log(id)
     fechTopic({ id });
   }
@@ -39,7 +45,7 @@ class Topic extends Component {
     }
   };
 
-  renderContent = (topic, is_collect) => {
+  renderContent = (topic, is_collect, id) => {
     return (
       <Fragment>
         <Helmet>
@@ -90,6 +96,7 @@ class Topic extends Component {
             <Comment
               replies={topic.replies}
               timeagoInstance={timeagoInstance}
+              id={id}
             />
           </WingBlank>
         </article>
@@ -112,7 +119,7 @@ class Topic extends Component {
               <Icon type="cross-circle" /> {topic.error}
             </WingBlank>
           ) : (
-            this.renderContent(topic.data, topic.is_collect)
+            this.renderContent(topic.data, topic.is_collect, this.state.id)
           )}
         </div>
         <WhiteSpace />

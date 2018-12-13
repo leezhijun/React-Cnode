@@ -19,7 +19,8 @@ export const topic = (state = defaultState, action) => {
       return {
         data: null,
         loading: false,
-        error: action.error
+        error: action.error,
+        is_collect: false
       }
     case 'COLLECT_SUCCEEDED':
       return {
@@ -30,6 +31,11 @@ export const topic = (state = defaultState, action) => {
       return {
         ...state,
         is_collect: false
+      }
+    case "FETCH_TOPIC_SUCCEEDED_AGAIN":
+      return {
+        ...state,
+        data: action.payload.data
       }
     default:
       return state

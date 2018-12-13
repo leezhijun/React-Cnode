@@ -33,7 +33,8 @@ class LoginPage extends PureComponent {
     }
     if (login.data.loginname) {
       Toast.success('fetch success', 1, () => {
-        history.push(`/user/${login.data.loginname}`)
+        // history.push(`/user/${login.data.loginname}`)
+        history.goBack()
       })
     }
   }

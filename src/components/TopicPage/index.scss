@@ -46,6 +46,7 @@
           font-size: 26px;
           color: #5fafe8;
           margin-top: 4px;
+          cursor: pointer;
         }
       }
     }
@@ -70,6 +71,7 @@
     i{
       padding-left: 10px;
       font-size: 16px;
+      cursor: pointer;
     }
   }
   .comment-add{
@@ -82,4 +84,9 @@
 
 .am-list-header,.am-list-item{
   padding-left: 0;
+}
+.am-list-header{
+  border-left: #3794d8 solid 2px;
+  padding: 0 0 0 6px;
+  margin: 15px 0;
 }
