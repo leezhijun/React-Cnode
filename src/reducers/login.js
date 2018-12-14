@@ -25,8 +25,18 @@ export const login = (state = defaultState, action) => {
       error: action.error
     }
     case "LOGIN_OUT" :
+    sessionStorage.removeItem('loginname');
+    sessionStorage.removeItem('accesstoken');
     return {
       data:{},
+      loading:false,
+      error: false
+    }
+    case "PAGE_REFRESH" :
+    const loginname = sessionStorage.getItem('loginname') ? sessionStorage.getItem('loginname') : null
+    const accesstoken = sessionStorage.getItem('accesstoken') ? sessionStorage.getItem('accesstoken') : null
+    return {
+      data:{loginname,accesstoken},
       loading:false,
       error: false
     }

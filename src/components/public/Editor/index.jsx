@@ -4,7 +4,7 @@ import "simplemde/dist/simplemde.min.css";
 class Edtior extends PureComponent {
 
   componentDidMount() {
-
+    this.props.onRef(this)
     this.simplemde = new SimpleMDE({
       element: document.getElementById("editor"),
       placeholder: "Type here..."
@@ -17,8 +17,11 @@ class Edtior extends PureComponent {
     });
   }
 
-  render() {
+  clearEditor = () => {
+    this.simplemde.value('')
+  }
 
+  render() {
     return (
       <Fragment>
         <textarea id="editor" />

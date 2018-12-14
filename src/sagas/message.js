@@ -19,7 +19,7 @@ function* fetchMsg(action) {
 }
 
 function* watchFetchMsg() {
-  yield takeEvery('FETCH_USER_REQUEST', fetchMsg);
+  yield takeEvery('FETCH_MSG_REQUEST', fetchMsg);
 }
 
 export const MsgSagas = [

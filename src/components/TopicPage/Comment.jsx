@@ -25,11 +25,16 @@ class Comment extends PureComponent {
     }
     // console.log({content,id})
     fechReplies({content,id})
+    this.child.clearEditor()
   };
+
+  onRef = (ref) => {
+      this.child = ref
+  }
 
   renderEidtor = () => {
     return <Fragment>
-      <Editor getContent={this.setContent} />
+      <Editor getContent={this.setContent} onRef={this.onRef} />
         <Flex justify="end">
           <Button
             style={{ marginRight: "10px" }}

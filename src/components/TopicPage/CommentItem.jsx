@@ -50,14 +50,19 @@ class CommentItem extends PureComponent {
       return false;
     }
     fechReplies({content,id:topic_id,reply_id})
+    this.child.clearEditor()
     this.setState({
       is_reply: !this.state.is_reply
     })
   };
 
+  onRef = (ref) => {
+    this.child = ref
+  }
+
   renderEidtor = () => {
     return <Fragment>
-      <Editor getContent={this.setContent} />
+      <Editor getContent={this.setContent} onRef={this.onRef} />
         <Flex justify="end">
           <Button
             style={{ marginRight: "10px" }}

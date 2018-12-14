@@ -13,6 +13,8 @@ function* fetchLogin(action) {
     });
     const res = yield call(axios.post, 'https://cnodejs.org/api/v1/accesstoken', action.payload);
     // console.log(res)
+    sessionStorage.setItem('loginname', res.data.loginname);
+    sessionStorage.setItem('accesstoken', action.payload.accesstoken);
     yield put({
       type: "FETCH_LOGIN_SUCCEEDED",
       payload: {

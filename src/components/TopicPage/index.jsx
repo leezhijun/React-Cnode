@@ -112,7 +112,7 @@ class Topic extends Component {
         <div className="main">
           {topic.loading ? (
             <WingBlank>
-              <Icon type="loading" />
+              <Icon type="loading" />&nbsp;loading...
             </WingBlank>
           ) : topic.error ? (
             <WingBlank>

@@ -13,7 +13,9 @@ const Routes = () => {
   return (
     <Router>
       <Fragment>
-        <Header />
+        <div className='header'>
+          <Header />
+        </div>
         <Route exact path='/' component={IndexPage} />
         <Route exact path='/topic/:id' component={TopicPage} />
         <Route exact path='/login' component={LoginPage} />

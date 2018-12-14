@@ -1,20 +1,17 @@
 import React, { PureComponent, Fragment } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { Tabs,List, WhiteSpace, WingBlank } from "antd-mobile";
+import { Tabs, List, WhiteSpace, WingBlank, Icon } from "antd-mobile";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 import { fechUser } from "../../actions/user";
 import timeago from "timeago.js";
 import style from "./index.scss";
 const timeagoInstance = timeago();
 
-const tabs = [
-  { title: '最近发表' },
-  { title: '最新回复' },
-];
+const tabs = [{ title: "最近发表" }, { title: "最新回复" }];
 const Item = List.Item;
 
 class UserPage extends PureComponent {
-
   componentDidMount() {
     const { match, fechUser } = this.props;
     let loginname = match.params.loginname;
@@ -24,6 +21,9 @@ class UserPage extends PureComponent {
   renderContent = user => {
     return (
       <div className={style["userinfo"]}>
+        <Helmet>
+          <title>{user.loginname} 个人主页</title>
+        </Helmet>
         <WingBlank>
           <div className={style["user"]}>
             <img src={user.avatar_url} alt={user.loginname} />
@@ -47,14 +47,26 @@ class UserPage extends PureComponent {
                   backgroundColor: "#fff"
                 }}
               >
-                {user.recent_topics.map(item => <Link key={item.id} to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
+                {user.recent_topics.map(item => (
+                  <Link key={item.id} to={`/topic/${item.id}`}>
+                    <Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>
+                      {item.title}
+                    </Item>
+                  </Link>
+                ))}
               </div>
               <div
                 style={{
                   backgroundColor: "#fff"
                 }}
               >
-                {user.recent_replies.map(item => <Link key={item.id} to={`/topic/${item.id}`}><Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>{item.title}</Item></Link>)}
+                {user.recent_replies.map(item => (
+                  <Link key={item.id} to={`/topic/${item.id}`}>
+                    <Item extra={timeagoInstance.format(item.last_reply_at, "zh_CN")}>
+                      {item.title}
+                    </Item>
+                  </Link>
+                ))}
               </div>
             </Tabs>
           </div>
@@ -69,7 +81,17 @@ class UserPage extends PureComponent {
       <Fragment>
         <WhiteSpace />
         <div className="main">
-          {loading ? "loading" : error ? "error" : this.renderContent(data)}
+          {loading ? (
+            <WingBlank>
+              <Icon type="loading" />&nbsp;loading...
+            </WingBlank>
+          ) : error ? (
+            <WingBlank>
+              <Icon type="cross-circle" /> {error}
+            </WingBlank>
+          ) : (
+            this.renderContent(data)
+          )}
         </div>
         <WhiteSpace />
       </Fragment>

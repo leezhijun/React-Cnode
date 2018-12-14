@@ -10,6 +10,7 @@ import {
   Flex
 } from "antd-mobile";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import { fechPublish } from "../../actions/publish";
 import Editor from "../public/Editor";
@@ -70,9 +71,16 @@ class PublishPage extends PureComponent {
     fechPublish({ title, tab: tabValue[0], content, history });
   };
 
+  onRef = (ref) => {
+    this.child = ref
+  }
+
   render() {
     return (
       <Fragment>
+        <Helmet>
+          <title>发布话题</title>
+        </Helmet>
         <WhiteSpace />
         <div className="main">
           <div className={style["publish"]}>
@@ -84,7 +92,9 @@ class PublishPage extends PureComponent {
               onOk={v => this.setState({ tabValue: v })}
               className="forss"
             >
-              <List.Item arrow="horizontal">分类</List.Item>
+              <List.Item arrow="horizontal" className={style["publish-cate"]}>
+                分类
+              </List.Item>
             </Picker>
             <InputItem
               placeholder="请输入话题标题"
@@ -96,7 +106,7 @@ class PublishPage extends PureComponent {
             </InputItem>
             <WhiteSpace />
             <WingBlank>
-              <Editor getContent={this.setContent} />
+              <Editor getContent={this.setContent}  onRef={this.onRef} />
               <Flex justify="end">
                 <Button
                   style={{ marginRight: "10px" }}

@@ -9,11 +9,15 @@ ul {
 }
 a{color:#363636}
 .main{
+  margin-top: 45px;
   margin-bottom: 50px;
 }
 .CodeMirror, .CodeMirror-scroll {
   min-height: 100px;
 }
-.am-list-item .am-list-line .am-list-content {
-  padding-left: 0;
+
+.header{
+  width: 100%;
+  position: fixed;
+  z-index: 999;
 }

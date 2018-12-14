@@ -2,15 +2,23 @@ import React, { PureComponent } from 'react';
 import { Popover, NavBar, Icon } from 'antd-mobile';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginOut } from '../../../actions/login'
+import { loginOut, pageRefresh } from '../../../actions/login'
 
 const Item = Popover.Item;
 
 class Header extends PureComponent {
+
+  constructor(props) {
+    super(props)
+    const { pageRefresh } = this.props
+    pageRefresh()
+  }
+
   state = {
     visible: false,
     selected: '',
   };
+
   onSelect = (opt) => {
     // console.log(opt.props.value)
     this.setState({
@@ -30,11 +38,13 @@ class Header extends PureComponent {
       break
     }
   };
+
   handleVisibleChange = (visible) => {
     this.setState({
       visible,
     });
   };
+
   render(){
     const { history, login } = this.props;
     let overlay =null;
@@ -49,6 +59,7 @@ class Header extends PureComponent {
         (<Item key="2" value="login" icon={<i className='iconfont icon-login'></i>}>登陆</Item>)
       ]
     }
+
     return(
       <NavBar
         mode="light"
@@ -92,6 +103,6 @@ const mapStateToProps = state => {
 
 export default withRouter(connect(
   mapStateToProps,
-  { loginOut }
+  { loginOut, pageRefresh }
 )(Header))
 
