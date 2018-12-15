@@ -42,7 +42,7 @@ class MsgPage extends PureComponent {
             <WingBlank>
               <List className="my-list">
                 {message.hasnot_read_messages.map(item => (
-                  <List.Item id="item.id">
+                  <List.Item key="item.id">
                     <Link to={`/topic/${item.topic.id}`}>
                       {item.topic.title}
                     </Link>
@@ -71,7 +71,7 @@ class MsgPage extends PureComponent {
             <WingBlank>
               <List className="my-list">
                 {message.has_read_messages.map(item => (
-                  <List.Item id="item.id">
+                  <List.Item key="item.id">
                     <Link to={`/topic/${item.topic.id}`}>
                       {item.topic.title}
                     </Link>

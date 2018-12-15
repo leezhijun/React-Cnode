@@ -21,3 +21,21 @@ a{color:#363636}
   position: fixed;
   z-index: 999;
 }
+
+.top{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  right: 10px;
+  bottom: 80px;
+  width: 36px;
+  height: 36px;
+  color: #999;
+  line-height: 36px;
+  border-radius: 6px;
+  text-align: center;
+  background-color:rgba($color: #FEFEFE, $alpha: 0.6);
+  box-shadow: 1px 1px 6px #bbb;
+}

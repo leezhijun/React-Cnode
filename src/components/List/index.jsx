@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 /* eslint no-dupe-keys: 0, no-mixed-operators: 0 */
 import { ListView, WhiteSpace, WingBlank } from "antd-mobile";
 import ListItem from "./ListItem";
@@ -34,24 +34,35 @@ import { fechTopics } from "../../actions/list";
 //   return dataBlob;
 // }
 
-class List extends Component {
+class List extends PureComponent {
   constructor(props) {
     super(props);
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
     });
+    const { tab, topics } = this.props;
+    const data = topics[tab]["data"];
+    if(topics[tab]["data"].length){
+      this.state = {
+        dataSource:dataSource.cloneWithRows(data),
+        isLoading: true
+      };
+    }else{
+      this.state = {
+        dataSource,
+        isLoading: true
+      };
+    }
 
-    this.state = {
-      dataSource,
-      isLoading: true
-    };
   }
 
   componentDidMount() {
     const { tab, fechTopics, topics } = this.props;
-    const page = topics[tab]["page"]; // 当前页码
-    const limit = topics[tab]["limit"]; // 调用条数
-    fechTopics({ tab, page, limit });
+    if(!topics[tab]["data"].length){ // 判断是否为空
+      const page = topics[tab]["page"]; // 当前页码
+      const limit = topics[tab]["limit"]; // 调用条数
+      fechTopics({ tab, page, limit });
+    }
   }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
@@ -69,30 +80,32 @@ class List extends Component {
   onEndReached = event => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    if (this.state.isLoading && !this.state.hasMore) {
-      return;
-    }
+    console.log(123);
+    // if (this.state.isLoading && !this.state.hasMore) {
+    //   return;
+    // }
     // console.log('reach end', event);
     this.setState({ isLoading: true });
     const { tab, fechTopics, topics } = this.props;
     const page = topics[tab]["page"]; // 当前页码
     const limit = topics[tab]["limit"]; // 调用条数
     fechTopics({ tab, page, limit });
+    // console.log(tab, page);
   };
 
   render() {
     const { tab, topics } = this.props;
-    const separator = (sectionID, rowID) => (
-      <div
-        key={`${sectionID}-${rowID}`}
-        style={{
-          backgroundColor: "#F5F5F9",
-          height: 8,
-          borderTop: "1px solid #ECECED",
-          borderBottom: "1px solid #ECECED"
-        }}
-      />
-    );
+    // const separator = (sectionID, rowID) => (
+    //   <div
+    //     key={`${sectionID}-${rowID}`}
+    //     style={{
+    //       backgroundColor: "#F5F5F9",
+    //       height: 8,
+    //       borderTop: "1px solid #ECECED",
+    //       borderBottom: "1px solid #ECECED"
+    //     }}
+    //   />
+    // );
     const row = rowData => {
       return <ListItem obj={rowData} />;
     };
@@ -115,14 +128,14 @@ class List extends Component {
               </div>
             )}
             renderRow={row}
-            renderSeparator={separator}
+            // renderSeparator={separator}
             className="am-list"
-            initialListSize={10}
+            initialListSize={topics[tab]["data"].length ? topics[tab]["data"].length : 20}
             pageSize={20}
             useBodyScroll
-            onScroll={() => {
-              console.log("scroll");
-            }}
+            // onScroll={() => {
+            //   console.log("scroll");
+            // }}
             scrollRenderAheadDistance={500}
             onEndReached={this.onEndReached}
             onEndReachedThreshold={10}

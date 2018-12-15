@@ -7,7 +7,7 @@ class Edtior extends PureComponent {
     this.props.onRef(this);
     this.simplemde = new SimpleMDE({
       element: document.getElementById("editor"),
-      placeholder: "Type here..."
+      placeholder: "markdown语法"
     });
 
     this.simplemde.codemirror.on("change", () => {

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { fechTopic, fechCollect, fechDe_collect } from "../../actions/topic.js";
+import { fechTopic, fechCollect, fechDe_collect, clearTopic } from "../../actions/topic.js";
 import { withRouter, Link } from "react-router-dom";
 import { WhiteSpace, WingBlank, Icon, Toast } from "antd-mobile";
 import { Helmet } from "react-helmet";
@@ -44,6 +44,10 @@ class Topic extends Component {
       Toast.info("请登陆后操作", 1);
     }
   };
+
+  componentWillUnmount () {
+    this.props.clearTopic()
+  }
 
   renderContent = (topic, is_collect, id) => {
     return (
@@ -138,6 +142,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { fechTopic, fechCollect, fechDe_collect }
+    { fechTopic, fechCollect, fechDe_collect, clearTopic }
   )(Topic)
 );

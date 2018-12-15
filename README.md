@@ -36,3 +36,25 @@
 #### 6.安装node-sass
 
 执行`npm install node-sass --save-dev` 
+
+### 上传github查看demo效果
+
+#### 1.安装 `npm install gh-pages --save-dev`
+
+#### 2.修改package.json
+
+添加属性
+
+`"homepage": "https://leezhijun/github.io/React-Cnode",`
+
+添加命令
+
+```json
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build"
+```
+
+
+
+
+

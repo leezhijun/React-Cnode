@@ -37,6 +37,14 @@ export const topic = (state = defaultState, action) => {
         ...state,
         data: action.payload.data
       }
+
+    case "CLEAR_TOPIC":
+      return {
+        data: null,
+        loading: true,
+        error: false,
+        is_collect: false
+      }
     default:
       return state
   }

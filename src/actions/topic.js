@@ -41,4 +41,9 @@ export const fechRepliesUp = (payload) => {
   }
 }
 
+export const clearTopic = () => {
+  return {
+    type:"CLEAR_TOPIC"
+  }
+}
 
