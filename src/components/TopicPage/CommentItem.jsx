@@ -36,9 +36,14 @@ class CommentItem extends PureComponent {
       Toast.info("登陆后操作!", 1);
       return false;
     }
-    this.setState({
-      is_reply: !this.state.is_reply
-    })
+
+    this.setState((state, props) => ({
+      is_reply: !state.is_reply
+    }),()=>{
+      if(!this.state.is_reply)
+      this.child.deleteEditor()
+    });
+
   }
 
   handleClick = () => {
