@@ -80,7 +80,7 @@ class List extends PureComponent {
   onEndReached = event => {
     // load new data
     // hasMore: from backend data, indicates whether it is the last page, here is false
-    console.log(123);
+    // console.log(123);
     // if (this.state.isLoading && !this.state.hasMore) {
     //   return;
     // }

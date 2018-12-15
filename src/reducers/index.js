@@ -4,6 +4,7 @@ import { topic } from './topic'
 import { user } from './user'
 import { login } from './login'
 import { message } from './message'
+import { tab } from './tab'
 import { combineReducers } from 'redux'
 export default combineReducers({
  test,
@@ -11,5 +12,6 @@ export default combineReducers({
  topic,
  user,
  login,
- message
+ message,
+ tab
 })

@@ -7,3 +7,10 @@ export const fechTopics = (payload) => {
     payload
   }
 }
+
+export const tabActive = (num) => {
+  return {
+    type:"TAB_ACTIVE",
+    num
+  }
+}

@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Tabs, WhiteSpace, Icon } from "antd-mobile";
+import { connect } from "react-redux";
+import { tabActive } from '../../actions/list'
 import List from "../List";
 import { Helmet } from "react-helmet";
 class IndexPage extends Component {
@@ -22,6 +24,7 @@ class IndexPage extends Component {
       { title: "招聘", key: "job" }
       // { title: '客户端测试', key:'dev' },
     ];
+    console.log(this.props.tab)
 
     return (
       <Fragment>
@@ -33,7 +36,7 @@ class IndexPage extends Component {
         <div className="main">
           <Tabs
             tabs={tabs}
-            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}
+            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} activeTab={this.props.tab} onTabClick={(tab, index) => { this.props.tabActive(index) }} />}
           >
             {this.renderContent}
           </Tabs>
@@ -47,4 +50,10 @@ class IndexPage extends Component {
   }
 }
 
-export default IndexPage;
+const mapStateToProps = state => {
+  return {
+    tab: state.tab
+  };
+};
+
+export default connect(mapStateToProps,{tabActive})(IndexPage)
