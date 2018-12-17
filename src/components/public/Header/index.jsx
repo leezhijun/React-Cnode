@@ -11,7 +11,9 @@ class Header extends PureComponent {
   constructor(props) {
     super(props)
     const { pageRefresh } = this.props
-    pageRefresh()
+    if (!this.props.login.data.accesstoken) {
+      pageRefresh()
+    }
   }
 
   state = {

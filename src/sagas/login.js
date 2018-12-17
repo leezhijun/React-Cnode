@@ -25,7 +25,7 @@ function* fetchLogin(action) {
       }
     });
   } catch (e) {
-    console.log(e)
+    // console.log(e)
     yield put({
       type: "FETCH_LOGIN_FAILURE",
       error: e.message

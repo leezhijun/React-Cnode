@@ -32,7 +32,7 @@ class LoginPage extends PureComponent {
       return false
     }
     if (login.data.loginname) {
-      Toast.success('fetch success', 1, () => {
+      Toast.success('登录成功!', 1, () => {
         // history.push(`/user/${login.data.loginname}`)
         history.goBack()
       })
