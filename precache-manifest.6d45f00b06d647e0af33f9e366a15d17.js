@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/React-Cnode/static/js/runtime~main.6b42319b.js"
   },
   {
-    "revision": "66c6113b6ed1cb7b4c0b",
-    "url": "/React-Cnode/static/js/main.66c6113b.chunk.js"
+    "revision": "85ce4cfc72ced66868d0",
+    "url": "/React-Cnode/static/js/main.85ce4cfc.chunk.js"
   },
   {
     "revision": "7117152bfa3be52f2f64",
     "url": "/React-Cnode/static/js/1.7117152b.chunk.js"
   },
   {
-    "revision": "66c6113b6ed1cb7b4c0b",
+    "revision": "85ce4cfc72ced66868d0",
     "url": "/React-Cnode/static/css/main.f12f894f.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/React-Cnode/static/css/1.7071ba7a.chunk.css"
   },
   {
-    "revision": "ccc3d2dd0281d4eee94378c6bb975c7b",
+    "revision": "efd56e3eb7f05bf5882a5ca243513420",
     "url": "/React-Cnode/index.html"
   }
 ];
