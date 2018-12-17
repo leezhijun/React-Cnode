@@ -24,7 +24,6 @@ class IndexPage extends Component {
       { title: "招聘", key: "job" }
       // { title: '客户端测试', key:'dev' },
     ];
-    console.log(this.props.tab)
 
     return (
       <Fragment>
@@ -36,7 +35,10 @@ class IndexPage extends Component {
         <div className="main">
           <Tabs
             tabs={tabs}
-            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} activeTab={this.props.tab} onTabClick={(tab, index) => { this.props.tabActive(index) }} />}
+            swipeable={false}
+            onChange={(tab, index) => { this.props.tabActive(index) }}
+            initialPage={this.props.tab}
+            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}
           >
             {this.renderContent}
           </Tabs>
