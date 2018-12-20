@@ -5,6 +5,7 @@ import { tabActive } from '../../actions/list'
 import List from "../List";
 import { Helmet } from "react-helmet";
 class IndexPage extends Component {
+
   renderContent = tab => (
     <div style={{ backgroundColor: "#fff" }}>
       <List tab={tab.key} />

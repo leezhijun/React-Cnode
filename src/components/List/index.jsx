@@ -3,7 +3,7 @@ import React, { PureComponent, Fragment } from "react";
 import { ListView, WhiteSpace, WingBlank } from "antd-mobile";
 import ListItem from "./ListItem";
 import { connect } from "react-redux";
-import { fechTopics } from "../../actions/list";
+import { fechTopics, getScrollTop } from "../../actions/list";
 
 // const data = [
 //   {
@@ -45,12 +45,12 @@ class List extends PureComponent {
     if(topics[tab]["data"].length){
       this.state = {
         dataSource:dataSource.cloneWithRows(data),
-        isLoading: true
+        isLoading: true,
       };
     }else{
       this.state = {
         dataSource,
-        isLoading: true
+        isLoading: true,
       };
     }
 
@@ -63,6 +63,7 @@ class List extends PureComponent {
       const limit = topics[tab]["limit"]; // 调用条数
       fechTopics({ tab, page, limit });
     }
+    document.body.scrollTop = document.documentElement.scrollTop = topics[tab]["scrollTop"];
   }
 
   // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
@@ -93,6 +94,22 @@ class List extends PureComponent {
     // console.log(tab, page);
   };
 
+  getScrollTop = () => {
+    var scroll_top = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+        scroll_top = document.documentElement.scrollTop;
+    }
+    else if (document.body) {
+        scroll_top = document.body.scrollTop;
+    }
+    return scroll_top;
+  }
+
+  componentWillUnmount(){
+    const { tab, getScrollTop } = this.props
+    getScrollTop(this.getScrollTop(), tab)
+  }
+
   render() {
     const { tab, topics } = this.props;
     // const separator = (sectionID, rowID) => (
@@ -106,7 +123,7 @@ class List extends PureComponent {
     //     }}
     //   />
     // );
-    const row = rowData => {
+    const row = (rowData,sectionID,rowID) => {
       return <ListItem obj={rowData} />;
     };
     return (
@@ -133,9 +150,9 @@ class List extends PureComponent {
             initialListSize={topics[tab]["data"].length ? topics[tab]["data"].length : 20}
             pageSize={20}
             useBodyScroll
-            // onScroll={() => {
-            //   console.log("scroll");
-            // }}
+            onScroll={() => {
+              // console.log(this.getScrollTop());
+            }}
             scrollRenderAheadDistance={500}
             onEndReached={this.onEndReached}
             onEndReachedThreshold={10}
@@ -154,5 +171,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fechTopics }
+  { fechTopics, getScrollTop }
 )(List);

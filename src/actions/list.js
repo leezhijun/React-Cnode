@@ -1,5 +1,6 @@
 import {
-  FETCH_TOPICS_REQUEST
+  FETCH_TOPICS_REQUEST,
+  GET_SCROLL_TOP
 } from './actionType'
 export const fechTopics = (payload) => {
   return {
@@ -12,5 +13,13 @@ export const tabActive = (num) => {
   return {
     type:"TAB_ACTIVE",
     num
+  }
+}
+
+export const getScrollTop = (scrollTop, tab) => {
+  return {
+    type: GET_SCROLL_TOP,
+    scrollTop,
+    tab
   }
 }

@@ -3,37 +3,43 @@ const defaultState = {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
   good: {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
   share: {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
   ask: {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
   job: {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
   dev: {
     data: [],
     page: 1,
     limit: 20,
-    error: false
+    error: false,
+    scrollTop:0
   },
 }
 
@@ -52,6 +58,14 @@ export const topics = (state = defaultState, action) => {
       tabState = Object.assign({}, { ...state
       })
       tabState[action.payload.tab].error = action.payload.error
+      return {
+        ...state,
+        ...tabState
+      }
+    case 'GET_SCROLL_TOP':
+      tabState = Object.assign({}, { ...state
+      })
+      tabState[action.tab].scrollTop = action.scrollTop
       return {
         ...state,
         ...tabState

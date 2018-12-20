@@ -10,3 +10,4 @@ export const FETCH_PUBLISH_REQUEST = 'FETCH_PUBLISH_REQUEST' // 发布文章
 export const FETCH_REPLIES_REQUEST = 'FETCH_REPLIES_REQUEST' // 新建评论
 export const FETCH_REPLIES_UP_REQUEST = 'FETCH_REPLIES_UP_REQUEST' // 评论点赞
 export const PAGE_REFRESH = 'PAGE_REFRESH' // 页面刷新
+export const GET_SCROLL_TOP = 'GET_SCROLL_TOP' // 页面滚动高度
